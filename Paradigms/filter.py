@@ -5,11 +5,11 @@ def filter(input_str, criteria_function):
             answer_list.append(string)
     return answer_list
     
-def check_string_starting_with(list_of_characters_to_match):
+def check_string_starting_with(char):
     predicate = lambda string : string[0] == char
     return predicate
     
-def check_string_ending_with(list_of_characters_to_match):
+def check_string_ending_with(char):
     predicate = lambda string : string[-1] == char
     return predicate
     
