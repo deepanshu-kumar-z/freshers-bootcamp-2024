@@ -10,8 +10,7 @@ class StartsWithStrategy:
     def setStartsWith(self, key):
         self.__startsWith = key
     def invoke(self, item):
-        if item[0].lower() == self.__startsWith.lower():
-            return item
+        return item[0].lower() == self.__startsWith.lower()
         
 class StringListFilterController:
     def filter(self,strList):
@@ -20,9 +19,10 @@ class StringListFilterController:
             startsWith.setStartsWith('a')
             Element = ConsoleDisplayController()
             if startsWith.invoke(message):
-                Element.setContent(startsWith.invoke(message))
+                Element.setContent(message)
                 Element.display()
 
 arrayOfStrings = ['ayan','deep','aman']
 StringListFilter = StringListFilterController()
 StringListFilter.filter(arrayOfStrings)
+        
