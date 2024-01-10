@@ -5,17 +5,28 @@ class StringFilter:
     def filter(self, criteria_function):
         return [string for string in self.input_str if criteria_function(string)]
 
-def check_string_starting_with(char):
-    predicate = lambda string: string[0] == char
-    return predicate
+class checkStringStart:
+    def __init__(self, char):
+        self.char = char
+        
+    def check_string_starting_with(self):
+        predicate = lambda string: string[0] == self.char
+        return predicate
 
-def check_string_ending_with(char):
-    predicate = lambda string: string[-1] == char
-    return predicate
+class checkStringEnd:
+    def __init__(self, char):
+        self.char = char
+        
+    def check_string_ending_with(self):
+        predicate = lambda string: string[-1] == self.char
+        return predicate
 
-def print_to_terminal(output_str_list):
-    for string in output_str_list:
-        print(string)
+class stringPrint:
+    def __init__(self,output_str_list):
+        self.output_str_list = output_str_list
+    def print_to_terminal(self):
+        for string in self.output_str_list:
+            print(string)
 
 
 if __name__ == "__main__":
@@ -25,12 +36,16 @@ if __name__ == "__main__":
 
     print("Names starting with specified characters:")
     for char in ['a', 'A', 'd', 'V', 'p']:
-        result = string_filter.filter(check_string_starting_with(char))
-        print_to_terminal(result)
+        check_string = checkStringStart(char)
+        result = string_filter.filter(check_string.check_string_starting_with())
+        string_print = stringPrint(result)
+        string_print.print_to_terminal()
 
     print("")
 
     print("Names ending with specified characters:")
     for char in ['a', 'A', 'd', 'V', 'p']:
-        result = string_filter.filter(check_string_ending_with(char))
-        print_to_terminal(result)
+        check_string = checkStringEnd(char)
+        result = string_filter.filter(check_string.check_string_ending_with())
+        string_print = stringPrint(result)
+        string_print.print_to_terminal()
