@@ -1,51 +1,28 @@
-class StringFilter:
-    def __init__(self, input_str):
-        self.input_str = input_str
-
-    def filter(self, criteria_function):
-        return [string for string in self.input_str if criteria_function(string)]
-
-class checkStringStart:
-    def __init__(self, char):
-        self.char = char
+class ConsoleDisplayController:
+    __content = ''
+    def setContent(self, message):
+        self.__content = message
+    def display(self):
+        print(self.__content)
         
-    def check_string_starting_with(self):
-        predicate = lambda string: string[0] == self.char
-        return predicate
-
-class checkStringEnd:
-    def __init__(self, char):
-        self.char = char
+class StartsWithStrategy:
+    __startsWith = ''
+    def setStartsWith(self, key):
+        self.__startsWith = key
+    def invoke(self, item):
+        if item[0].lower() == self.__startsWith.lower():
+            return item
         
-    def check_string_ending_with(self):
-        predicate = lambda string: string[-1] == self.char
-        return predicate
+class StringListFilterController:
+    def filter(self,strList):
+        for message in strList:
+            startsWith = StartsWithStrategy()
+            startsWith.setStartsWith('a')
+            Element = ConsoleDisplayController()
+            if startsWith.invoke(message):
+                Element.setContent(startsWith.invoke(message))
+                Element.display()
 
-class stringPrint:
-    def __init__(self,output_str_list):
-        self.output_str_list = output_str_list
-    def print_to_terminal(self):
-        for string in self.output_str_list:
-            print(string)
-
-
-if __name__ == "__main__":
-    array_of_strings = ['Abhishek', 'abhinav', 'Deepanshu', 'Vishal', 'Manisha', 'Dadlani']
-
-    string_filter = StringFilter(array_of_strings)
-
-    print("Names starting with specified characters:")
-    for char in ['a', 'A', 'd', 'V', 'p']:
-        check_string = checkStringStart(char)
-        result = string_filter.filter(check_string.check_string_starting_with())
-        string_print = stringPrint(result)
-        string_print.print_to_terminal()
-
-    print("")
-
-    print("Names ending with specified characters:")
-    for char in ['a', 'A', 'd', 'V', 'p']:
-        check_string = checkStringEnd(char)
-        result = string_filter.filter(check_string.check_string_ending_with())
-        string_print = stringPrint(result)
-        string_print.print_to_terminal()
+arrayOfStrings = ['ayan','deep','aman']
+StringListFilter = StringListFilterController()
+StringListFilter.filter(arrayOfStrings)
