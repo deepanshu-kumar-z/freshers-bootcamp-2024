@@ -29,7 +29,7 @@ class Thread:
         return self.culture
     
     def setState(self,state):
-        self.notify("State")
+        self.notify("State",state)
         self.state = state
         
     def setPriority(self,priority):
@@ -40,10 +40,10 @@ class Thread:
         self.notify("Culture")
         self.culture = state
     
-    def notify(self,message):
+    def notify(self,message,state):
         for observer in self.array:
             observer.update(self.state)
-        print(message, "changed!!")
+        print(message, "changed to ", state)
     
     def start(self):
         self.setState("running")
@@ -71,4 +71,3 @@ class Thread:
 t1 = Thread()
 t1.start()
 t1.sleep(10)
-print(t1.getState())
