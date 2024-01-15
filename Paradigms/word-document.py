@@ -91,20 +91,20 @@ class ConverterInterface(ABC):
     def convertPara(self, paragraph: Paragraph):
         pass
     
-class HTMLConverter(ConverterInterface):
-    def convertHeader(self, header : Header):
-        print("<h1>"+header.title+"</h1>")
+class MarkdownConverter(ConverterInterface):
+    def convertHeader(self, header: Header):
+        print("# {}".format(header.title))
         
-    def convertFooter(self, footer : Footer):
-        print("<h2>"+footer.text+"</h2>")
+    def convertFooter(self, footer: Footer):
+        print("## {}".format(footer.text))
     
-    def convertHyperLink(self, hyperlink : Hyperlink):
-        print("<a href = {}>{}</a>".format(hyperlink.url, hyperlink.text))
+    def convertHyperLink(self, hyperlink: Hyperlink):
+        print("[{}]({})".format(hyperlink.text, hyperlink.url))
     
-    def convertPara(self, paragraph : Paragraph):
-        print("<p>{}</p>".format(paragraph.content))
+    def convertPara(self, paragraph: Paragraph):
+        print(paragraph.content)
     
-class WordDocument:
+class MarkdownDocument:
     def __init__(self, documentParts=[]):
         self.documentParts = documentParts
         
@@ -122,23 +122,23 @@ class WordDocument:
 def main():
     headerObj = Header("Title1")
     hyperlinkObj = Hyperlink("google.co.in", "search")
-    footerObj = Footer()
-    paragraphObj = Paragraph()
+    footerObj = Footer("FooterText")
+    paragraphObj = Paragraph("This is a paragraph.")
     
     documentPartList = [headerObj, footerObj, hyperlinkObj, paragraphObj] 
     
-    wordDoc = WordDocument(documentPartList)
+    markdownDoc = MarkdownDocument(documentPartList)
     
-    HTMLConverterObj = HTMLConverter()
+    MarkdownConverterObj = MarkdownConverter()
      
-    wordDoc.openDocument()
+    markdownDoc.openDocument()
     print()
-    wordDoc.saveDocument()
+    markdownDoc.saveDocument()
     print()
-    print("Converting to HTML")
+    print("Converting to Markdown")
     print("*"*25)
 
-    for docPart in wordDoc.documentParts:
-        docPart.convert(HTMLConverterObj)
+    for docPart in markdownDoc.documentParts:
+        docPart.convert(MarkdownConverterObj)
     
 main()
