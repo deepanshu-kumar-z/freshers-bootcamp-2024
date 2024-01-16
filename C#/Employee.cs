@@ -16,7 +16,7 @@ public class Employee
         string msg = "";
         msg = "Employee Id : " + EmployeeId + "\n";
         msg += "Employee Name : " + Name + "\n";
-		    msg += "Employee Salary : " + Salary + "\n";
-		    Console.WriteLine(msg);
+	msg += "Employee Salary : " + Salary + "\n";
+	Console.WriteLine(msg);
     }
 }
