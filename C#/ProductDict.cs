@@ -63,15 +63,38 @@ class Product
 
     public void Display()
     {
+        ProductDisplay.DisplayProductDetails(this);
+    }
+}
+
+class ProductDisplay
+{
+    public static void DisplayProductList(Dictionary<int, Product> productList)
+    {
+        if (productList.Count == 0)
+        {
+            Console.WriteLine("No products to display.");
+            return;
+        }
+
+        Console.WriteLine("List of Products:");
+        foreach (var product in productList.Values)
+        {
+            DisplayProductDetails(product);
+        }
+    }
+
+    public static void DisplayProductDetails(Product product)
+    {
         StringBuilder displayBuilder = new StringBuilder();
-        displayBuilder.AppendLine($"Product ID: {_productId}")
-                      .AppendLine($"Product Name: {_productName}")
-                      .AppendLine($"Manufacturing Date: {_mfgDate.ToShortDateString()}")
-                      .AppendLine($"Warranty (in years): {_warranty}")
-                      .AppendLine($"Price: {_price:C}")
-                      .AppendLine($"Stock: {_stock}")
-                      .AppendLine($"GST: {_gst}")
-                      .AppendLine($"Discount: {_discount}")
+        displayBuilder.AppendLine($"Product ID: {product.ProductId}")
+                      .AppendLine($"Product Name: {product.ProductName}")
+                      .AppendLine($"Manufacturing Date: {product.MfgDate.ToShortDateString()}")
+                      .AppendLine($"Warranty (in years): {product.Warranty}")
+                      .AppendLine($"Price: {product.Price:C}")
+                      .AppendLine($"Stock: {product.Stock}")
+                      .AppendLine($"GST: {product.GST}")
+                      .AppendLine($"Discount: {product.Discount}")
                       .AppendLine();
 
         Console.WriteLine(displayBuilder.ToString());
@@ -188,45 +211,36 @@ class Program
 
     static void DisplayAllProducts()
     {
-        if (products.Count == 0)
-        {
-            Console.WriteLine("No products to display.");
-            return;
-        }
-
-        Console.WriteLine("List of Products:");
-        foreach (var product in products.Values)
-        {
-            product.Display();
-        }
+        ProductDisplay.DisplayProductList(products);
     }
 
     static void FindProduct()
     {
-        Console.Write("Enter Product ID to find: ");
-        int idToFind = Convert.ToInt32(Console.ReadLine());
-        if (products.TryGetValue(idToFind, out var productFound))
+        Console.Write("Enter the product id : ");
+        int id = Convert.ToInt32(Console.ReadLine());
+        if (products.ContainsKey(id))
         {
-            productFound.Display();
+            Console.WriteLine("Product found!!");
+            products[id].Display();
         }
         else
         {
-            Console.WriteLine("Product not found with the given ID.");
+            Console.WriteLine("No product found with given id.");
         }
     }
 
     static void RemoveProduct()
     {
-        Console.Write("Enter Product ID to remove: ");
-        int idToRemove = Convert.ToInt32(Console.ReadLine());
-        if (products.ContainsKey(idToRemove))
+        Console.Write("Enter the product id : ");
+        int id = Convert.ToInt32(Console.ReadLine());
+        if (products.ContainsKey(id))
         {
-            products.Remove(idToRemove);
+            products.Remove(id);
             Console.WriteLine("Product removed successfully!");
         }
         else
         {
-            Console.WriteLine("Product not found with the given ID.");
+            Console.WriteLine("No product found with given id.");
         }
     }
 }
