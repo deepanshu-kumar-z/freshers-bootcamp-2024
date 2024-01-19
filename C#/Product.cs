@@ -63,15 +63,38 @@ class Product
 
     public void Display()
     {
+        ProductDisplay.DisplayProductDetails(this);
+    }
+}
+
+class ProductDisplay
+{
+    public static void DisplayProductList(List<Product> productList)
+    {
+        if (productList.Count == 0)
+        {
+            Console.WriteLine("No products to display.");
+            return;
+        }
+
+        Console.WriteLine("List of Products:");
+        foreach (var product in productList)
+        {
+            DisplayProductDetails(product);
+        }
+    }
+
+    public static void DisplayProductDetails(Product product)
+    {
         StringBuilder displayBuilder = new StringBuilder();
-        displayBuilder.AppendLine($"Product ID: {_productId}")
-                      .AppendLine($"Product Name: {_productName}")
-                      .AppendLine($"Manufacturing Date: {_mfgDate.ToShortDateString()}")
-                      .AppendLine($"Warranty (in years): {_warranty}")
-                      .AppendLine($"Price: {_price:C}")
-                      .AppendLine($"Stock: {_stock}")
-                      .AppendLine($"GST: {_gst}")
-                      .AppendLine($"Discount: {_discount}")
+        displayBuilder.AppendLine($"Product ID: {product.ProductId}")
+                      .AppendLine($"Product Name: {product.ProductName}")
+                      .AppendLine($"Manufacturing Date: {product.MfgDate.ToShortDateString()}")
+                      .AppendLine($"Warranty (in years): {product.Warranty}")
+                      .AppendLine($"Price: {product.Price:C}")
+                      .AppendLine($"Stock: {product.Stock}")
+                      .AppendLine($"GST: {product.GST}")
+                      .AppendLine($"Discount: {product.Discount}")
                       .AppendLine();
 
         Console.WriteLine(displayBuilder.ToString());
@@ -171,16 +194,6 @@ class Program
 
     static void DisplayProducts(List<Product> productList)
     {
-        if (productList.Count == 0)
-        {
-            Console.WriteLine("No products to display.");
-            return;
-        }
-
-        Console.WriteLine("List of Products:");
-        foreach (var product in productList)
-        {
-            product.Display();
-        }
+        ProductDisplay.DisplayProductList(productList);
     }
 }
