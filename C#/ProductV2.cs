@@ -212,7 +212,7 @@ class Program
         foreach (var product in productList) 
         {
             if(id == product.ProductId){
-                Console.Write("Product found!!");
+                Console.WriteLine("Product found!!");
                 product.Display();
                 return;
             }
