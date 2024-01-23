@@ -21,9 +21,8 @@ namespace ConsoleApp4
         private state state1;
         public void ChangeState(int num)
         {
-            state st = (state)num;
-            this.state1 = st;
-            Console.WriteLine(this.state1);
+            this.state1 = (state)num;
+            Console.WriteLine("State changed to {0}",this.state1);
         }
     }
 }
