@@ -15,10 +15,10 @@ namespace ConsoleApp5
         public void Open()
         {
             base.Open();
-            StartTimer();
+            StartDoorTimer();
         }
 
-        private void StartTimer()
+        private void StartDoorTimer()
         {
             timer.StartTimer(() =>
             {
