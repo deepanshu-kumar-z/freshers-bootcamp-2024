@@ -15,11 +15,6 @@ namespace ConsoleApp5
         public void Open()
         {
             base.Open();
-            StartDoorTimer();
-        }
-
-        private void StartDoorTimer()
-        {
             timer.StartTimer(() =>
             {
                 if (state == DoorState.Opened)
